@@ -32,4 +32,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/inventaris', [InventarisController::class, 'index']);
     Route::post('/inventaris/create', [InventarisController::class, 'store']);
     Route::put('/inventaris/{id}', [InventarisController::class, 'update']);
+    Route::delete('/inventaris/{id}', [InventarisController::class, 'destroy']);
 });

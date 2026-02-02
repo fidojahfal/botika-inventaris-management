@@ -78,7 +78,7 @@ class InventarisController extends Controller
                 "errors" => $validate->errors(),
             ], 422);
         }
-        
+
         $validatedData = $validate->validated();
         $inventaris->update($validatedData);
 
@@ -88,14 +88,13 @@ class InventarisController extends Controller
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $inventaris = Inventaris::findOrFail($id);
+        $inventaris->delete();
+
+        return response()->json([
+            "message" => 'Success',
+        ], 200);
     }
 }
