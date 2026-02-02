@@ -13,7 +13,7 @@ class Inventaris extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     protected $table = "inventaris";
-    protected $fillable = ["name", "type_id", "serial_number", "spesifikasi", "status_id", "assigned_user_id", "department_id"];
+    protected $fillable = ["id", "name", "type_id", "serial_number", "spesifikasi", "status_id", "assigned_user_id", "department_id"];
 
     public function type()
     {
