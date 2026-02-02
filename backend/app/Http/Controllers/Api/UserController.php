@@ -72,7 +72,7 @@ class UserController extends Controller
         return response()->json([
             "message" => 'Success',
             "data" => $user,
-        ], 201);
+        ], 200);
     }
 
     public function destroy($id)
