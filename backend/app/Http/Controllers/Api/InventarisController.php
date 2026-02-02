@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inventaris;
 use Illuminate\Http\Request;
 
 class InventarisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $inventaris = Inventaris::with(['department', 'assignedUser:id,name', 'status', 'type'])->get();
+
+        return response()->json([
+            'message' => "Success",
+            "data" => $inventaris,
+        ], 200);
     }
 
     /**
