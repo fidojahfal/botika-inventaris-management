@@ -51,27 +51,41 @@ class InventarisController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function show($id) {}
+
+
     public function update(Request $request, $id)
     {
-        //
+        $inventaris = Inventaris::findOrFail($id);
+
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'name' => 'string|required',
+                'type_id' => 'integer|required|exists:type_inventaris,id',
+                'serial_number' => 'string|required',
+                'spesifikasi' => 'string|required',
+                'status_id' => 'integer|required|exists:status_inventaris,id',
+                'assigned_user_id' => 'integer|required|exists:users,id',
+                'department_id' => 'integer|required|exists:departments,id',
+            ]
+        );
+
+        if ($validate->fails()) {
+            return response()->json([
+                "message" => "Failed to input user, please check your input!",
+                "errors" => $validate->errors(),
+            ], 422);
+        }
+        
+        $validatedData = $validate->validated();
+        $inventaris->update($validatedData);
+
+        return response()->json([
+            "message" => 'Success',
+            "data" => $inventaris,
+        ], 200);
     }
 
     /**
