@@ -22,7 +22,7 @@ class InventarisSeeder extends Seeder
                 'serial_number' => '11235512',
                 'spesifikasi' => 'RAM 16GB',
                 'status_id' => 1,
-                'assigned_user_id' => 2,
+                'assigned_user_id' => 1,
                 'department_id' => 1,
             ],
             [
@@ -42,7 +42,7 @@ class InventarisSeeder extends Seeder
                 'serial_number' => '11929319',
                 'spesifikasi' => 'RAM 16GB',
                 'status_id' => 4,
-                'assigned_user_id' => 2,
+                'assigned_user_id' => 3,
                 'department_id' => 1,
             ],
             [
@@ -52,7 +52,7 @@ class InventarisSeeder extends Seeder
                 'serial_number' => '220310902',
                 'spesifikasi' => 'RAM 16GB',
                 'status_id' => 3,
-                'assigned_user_id' => 2,
+                'assigned_user_id' => 4,
                 'department_id' => 1,
             ],
             [
@@ -62,7 +62,7 @@ class InventarisSeeder extends Seeder
                 'serial_number' => '321021023',
                 'spesifikasi' => 'RAM 16GB',
                 'status_id' => 1,
-                'assigned_user_id' => 2,
+                'assigned_user_id' => 5,
                 'department_id' => 1,
             ],
             [
@@ -72,7 +72,7 @@ class InventarisSeeder extends Seeder
                 'serial_number' => '112302012',
                 'spesifikasi' => 'IPS Panel',
                 'status_id' => 2,
-                'assigned_user_id' => 3,
+                'assigned_user_id' => 1,
                 'department_id' => 2,
             ],
             [
