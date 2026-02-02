@@ -9,6 +9,9 @@ class Inventaris extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $table = "inventaris";
     protected $fillable = ["name", "type_id", "serial_number", "spesifikasi", "status_id", "assigned_user_id", "department_id"];
 
