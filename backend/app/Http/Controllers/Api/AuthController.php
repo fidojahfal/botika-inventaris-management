@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -27,11 +28,12 @@ class AuthController extends Controller
             return response()->json(['message' => 'Email or password is wrong!'], 401);
         }
 
+        $user = User::where('email', $request->email)->firstOrFail();
         $token = $request->user()->createToken('api-token')->plainTextToken;
 
         return response()->json([
             'token' => $token,
-            'user' => $request->user(),
+            'user' => $user->only(['id', 'email', 'name']),
         ]);
     }
 
