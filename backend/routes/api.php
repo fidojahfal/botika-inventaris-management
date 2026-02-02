@@ -30,4 +30,5 @@ Route::middleware('auth:sanctum')->group(function () {
 // Inventaris Route
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/inventaris', [InventarisController::class, 'index']);
+    Route::post('/inventaris/create', [InventarisController::class, 'store']);
 });
