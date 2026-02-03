@@ -23,7 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'jabatan',
+        'position_id',
         'department_id'
     ];
 
@@ -51,7 +51,13 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
-    public function assignedInventaris(){
+    public function assignedInventaris()
+    {
         return $this->hasMany(Inventaris::class, "assigned_user_id");
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
     }
 }

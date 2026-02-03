@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('department')->get();
+        $users = User::with(['department', 'position'])->get();
 
         return response()->json([
             'message' => "Success",
@@ -25,7 +25,7 @@ class UserController extends Controller
             $request->all(),
             [
                 'name' => 'string|required',
-                'jabatan' => 'string|required',
+                'position_id' => 'required|integer|exists:positions,id',
                 'department_id' => 'integer|required|exists:departments,id',
             ]
         );
@@ -54,7 +54,7 @@ class UserController extends Controller
             $request->all(),
             [
                 'name' => 'string|required',
-                'jabatan' => 'string|required',
+                'position_id' => 'required|integer|exists:positions,id',
                 'department_id' => 'integer|required|exists:departments,id',
             ]
         );

@@ -3,9 +3,14 @@ export interface Department {
   name: string;
 }
 
+export interface Position {
+  id: number;
+  name: string;
+}
+
 export interface User {
   id: number;
   name: string;
-  jabatan: string;
+  position: Position;
   department: Department;
 }

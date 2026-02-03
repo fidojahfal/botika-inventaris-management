@@ -121,7 +121,7 @@ const goToPage = (page: number) => {
             </td>
 
             <td class="py-5 text-gray-700 border-b border-gray-100">
-              {{ user.jabatan }}
+              {{ user.position.name }}
             </td>
 
             <td class="py-5 text-gray-700 border-b border-gray-100">

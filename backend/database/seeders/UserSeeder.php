@@ -19,34 +19,34 @@ class UserSeeder extends Seeder
             'name' => 'Tiara Tiara',
             'email' => 'tiara@botika.online',
             'password' => Hash::make('password'),
-            'jabatan' => 'Inventory Administrator',
+            'position_id' => 5,
             'department_id' => 1,
         ]);
 
         User::insert([
             [
                 'name' => 'Daniel Alexander Carter',
-                'jabatan' => 'Senior Software Engineer',
+                'position_id' => 1,
                 'department_id' => 1,
             ],
             [
                 'name' => 'Emily Grace Johnson',
-                'jabatan' => 'Marketing and Communications Executive',
+                'position_id' => 3,
                 'department_id' => 2,
             ],
             [
                 'name' => 'Michael Benjamin Lee',
-                'jabatan' => 'Financial Operations Officer',
+                'position_id' => 3,
                 'department_id' => 3,
             ],
             [
                 'name' => 'Sophia Elizabeth Turner',
-                'jabatan' => 'Quality Assurance',
+                'position_id' => 4,
                 'department_id' => 1,
             ],
             [
                 'name' => 'Christopher Nathan Adams',
-                'jabatan' => 'Financial Operations Officer',
+                'position_id' => 3,
                 'department_id' => 3,
             ],
         ]);
