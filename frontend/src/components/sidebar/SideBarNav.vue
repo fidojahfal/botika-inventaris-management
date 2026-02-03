@@ -1,10 +1,19 @@
 <script setup lang="ts">
+import {
+  ChartPieIcon,
+  ClipboardDocumentListIcon,
+  UsersIcon,
+} from "@heroicons/vue/24/outline";
 import { RouterLink } from "vue-router";
 
 const menuItems = [
-  { name: "Data Inventaris", path: "/inventaris" },
-  { name: "Management Anggota", path: "/users" },
-  { name: "Analytics", path: "/analytics" },
+  {
+    name: "Data Inventaris",
+    path: "/inventaris",
+    icon: ClipboardDocumentListIcon,
+  },
+  { name: "Management Anggota", path: "/users", icon: UsersIcon },
+  { name: "Analytics", path: "/analytics", icon: ChartPieIcon },
 ];
 </script>
 
@@ -22,9 +31,9 @@ const menuItems = [
         class="flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group cursor-pointer"
         :class="isActive ? 'bg-gray-100' : 'hover:bg-gray-50 bg-transparent'"
       >
-        <div>
+        <div class="flex gap-3">
           <component
-            :is=""
+            :is="item.icon"
             class="w-6 h-6 stroke-[1.5]"
             :class="
               isActive
