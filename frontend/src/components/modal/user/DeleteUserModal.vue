@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { XMarkIcon, ChevronDownIcon, TrashIcon } from "@heroicons/vue/24/outline";
-import type { Department, Position, User } from "../../types/user";
+import type { Department, Position, User } from "../../../types/user";
 
 const props = defineProps<{
   isOpen: boolean;

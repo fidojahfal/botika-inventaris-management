@@ -15,10 +15,10 @@ import {
   type User,
 } from "../types/user";
 import { createUser, deleteUser, getUsers, updateUser } from "../api/users";
-import CreateUserModal from "../components/modal/CreateUserModal.vue";
+import CreateUserModal from "../components/modal/user/CreateUserModal.vue";
 import { getDepartments, getPositions } from "../api/utils";
-import EditUserModal from "../components/modal/EditUserModal.vue";
-import DeleteUserModal from "../components/modal/deleteUserModal.vue";
+import EditUserModal from "../components/modal/user/EditUserModal.vue";
+import DeleteUserModal from "../components/modal/user/DeleteUserModal.vue";
 
 const users = ref<User[]>([]);
 const loading = ref<boolean>(false);
