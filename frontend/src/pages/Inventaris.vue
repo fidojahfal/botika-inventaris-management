@@ -24,11 +24,13 @@ import type {
 } from "../types/inventaris";
 import {
   createInventaris,
+  deleteInventaris,
   getInventaris,
   updateInventaris,
 } from "../api/inventaris";
 import CreateInventarisModal from "../components/modal/inventaris/CreateInventarisModal.vue";
 import EditInventarisModal from "../components/modal/inventaris/EditInventarisModal.vue";
+import DeleteInventarisModal from "../components/modal/inventaris/DeleteInventarisModal.vue";
 
 const inventaris = ref<Inventaris[]>([]);
 const loading = ref<boolean>(false);
@@ -62,7 +64,7 @@ const handleEditInventaris = async (data: UpdateInventarisPayload) => {
   try {
     await updateInventaris(data.id, data);
   } catch (e) {
-    error.value = "Failed to update user!";
+    error.value = "Failed to update inventaris!";
   } finally {
     isEditModalOpen.value = !isEditModalOpen.value;
     await fetchInventaris();
@@ -74,11 +76,11 @@ const handleDeleteOpenModal = (inventaris: Inventaris) => {
   isDeleteModalOpen.value = !isDeleteModalOpen.value;
   selectedInventaris.value = inventaris;
 };
-const handleDeleteUser = async (data: { id: number }) => {
+const handleDeleteInventaris = async (data: { id: string }) => {
   try {
-    await deleteUser(data.id);
+    await deleteInventaris(data.id);
   } catch (e) {
-    error.value = "Failed to update user!";
+    error.value = "Failed to delete user!";
   } finally {
     isDeleteModalOpen.value = !isDeleteModalOpen.value;
     await fetchInventaris();
@@ -221,11 +223,11 @@ onMounted(() => {
       @close="isEditModalOpen = false"
       @save="handleEditInventaris"
     />
-    <DeleteUserModal
-      :user="selectedUser"
+    <DeleteInventarisModal
+      :inventaris="selectedInventaris"
       :is-open="isDeleteModalOpen"
       @close="isDeleteModalOpen = false"
-      @confirm="handleDeleteUser"
+      @confirm="handleDeleteInventaris"
     />
   </AppLayout>
 </template>
