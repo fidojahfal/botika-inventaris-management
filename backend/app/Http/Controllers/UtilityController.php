@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
 class UtilityController extends Controller
@@ -14,6 +15,16 @@ class UtilityController extends Controller
         return response()->json([
             "message" => 'Success',
             "data" => $departments
+        ]);
+    }
+
+    public function getAllPositions()
+    {
+        $positions = Position::all();
+
+        return response()->json([
+            "message" => 'Success',
+            "data" => $positions
         ]);
     }
 }

@@ -39,4 +39,5 @@ Route::middleware('auth:sanctum')->group(function () {
 //Utility Route
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/departments', [UtilityController::class, 'getAllDepartments']);
+    Route::get('/positions', [UtilityController::class, 'getAllPositions']);
 });
