@@ -7,12 +7,36 @@ import {
 } from "@heroicons/vue/24/outline";
 import AppLayout from "../components/layout/AppLayout.vue";
 import UserTable from "../components/tables/UserTable.vue";
-import type { User } from "../types/user";
-import { getUsers } from "../api/users";
+import {
+  Position,
+  type CreateUserPayload,
+  type Department,
+  type User,
+} from "../types/user";
+import { createUser, getUsers } from "../api/users";
+import CreateUserModal from "../components/modal/CreateUserModal.vue";
+import { getDepartments, getPositions } from "../api/utils";
 
 const users = ref<User[]>([]);
 const loading = ref<boolean>(false);
 const error = ref<string>("");
+const positions = ref<Position[]>([]);
+const departments = ref<Department[]>([]);
+
+const isCreateModalOpen = ref<boolean>(false);
+const handleOpenModal = async () => {
+  isCreateModalOpen.value = !isCreateModalOpen.value;
+};
+const handleCreateUser = async (data: CreateUserPayload) => {
+  try {
+    await createUser(data);
+  } catch (e) {
+    error.value = "Failed to create user!";
+  } finally {
+    isCreateModalOpen.value = !isCreateModalOpen.value;
+    await fetchUser();
+  }
+};
 
 const sort = ref<string>("ascending");
 const sortUser = () => {
@@ -36,7 +60,7 @@ const filteredUser = computed(() => {
   return users.value.filter((user) => {
     return (
       user.name.toLowerCase().includes(loweringQuery) ||
-      user.jabatan.toLowerCase().includes(loweringQuery) ||
+      user.position.name.toLowerCase().includes(loweringQuery) ||
       user.department.name.toLowerCase().includes(loweringQuery)
     );
   });
@@ -47,6 +71,8 @@ const fetchUser = async () => {
 
   try {
     users.value = await getUsers();
+    positions.value = await getPositions();
+    departments.value = await getDepartments();
   } catch (e) {
     error.value = "Failed to get users!";
   } finally {
@@ -102,6 +128,7 @@ onMounted(() => {
           class="flex items-center justify-center bg-black rounded-2xl py-3 px-4"
         >
           <button
+            @click="handleOpenModal"
             class="flex items-center gap-3 text-md font-medium bg-gradient-to-r from-teal-300 to-amber-300 bg-clip-text text-transparent cursor-pointer"
           >
             <span
@@ -119,5 +146,12 @@ onMounted(() => {
     <div v-if="!loading && !error">
       <UserTable :users="filteredUser" :query="searchQuery" />
     </div>
+    <CreateUserModal
+      :positions="positions"
+      :departments="departments"
+      :is-open="isCreateModalOpen"
+      @close="isCreateModalOpen = false"
+      @save="handleCreateUser"
+    />
   </AppLayout>
 </template>

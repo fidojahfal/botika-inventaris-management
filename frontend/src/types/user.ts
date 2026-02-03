@@ -14,3 +14,9 @@ export interface User {
   position: Position;
   department: Department;
 }
+
+export interface CreateUserPayload {
+  name: string;
+  position_id: number;
+  department_id: number;
+}
