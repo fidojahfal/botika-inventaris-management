@@ -77,7 +77,7 @@ const handleDeleteUser = async (data: { id: number }) => {
 };
 
 const sort = ref<string>("ascending");
-const sortUser = () => {
+const sortInventaris = () => {
   if (sort.value === "ascending") {
     sort.value = "descending";
     inventaris.value.sort((a, b) => b.id.localeCompare(a.id));
@@ -149,7 +149,7 @@ onMounted(() => {
 
           <div
             class="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer group"
-            @click="sortUser"
+            @click="sortInventaris"
             v-if="sort === 'ascending'"
           >
             <BarsArrowUpIcon
@@ -158,7 +158,7 @@ onMounted(() => {
           </div>
           <div
             class="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer group"
-            @click="sortUser"
+            @click="sortInventaris"
             v-if="sort === 'descending'"
           >
             <BarsArrowDownIcon
