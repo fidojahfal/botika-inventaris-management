@@ -2,11 +2,13 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "../pages/Login.vue";
 import Users from "../pages/Users.vue";
 import Inventaris from "../pages/Inventaris.vue";
+import Analytics from "../pages/Analytics.vue";
 
 const routes = [
   { path: "/login", component: Login, meta: { guest: true } },
   { path: "/users", component: Users, meta: { requiresAuth: true } },
   { path: "/inventaris", component: Inventaris, meta: { requiresAuth: true } },
+  { path: "/analytics", component: Analytics, meta: { requiresAuth: true } },
 ];
 
 const router = createRouter({

@@ -31,3 +31,20 @@ export interface CreateInventarisPayload {
 }
 
 export interface UpdateInventarisPayload extends CreateInventarisPayload {}
+
+export interface Summary {
+  baik: number;
+  rusak: number;
+  dilelang: number;
+  tidak_dipakai: number;
+}
+
+export interface Chart {
+  label: string;
+  value: number;
+}
+
+export interface Analytics {
+  summary: Summary;
+  chart: Chart[];
+}

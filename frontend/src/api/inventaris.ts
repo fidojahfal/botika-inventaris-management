@@ -32,3 +32,9 @@ export const deleteInventaris = async (id: string): Promise<string> => {
 
   return res.data.message;
 };
+
+export const getAnalytics = async () => {
+  const res = await api.get("/inventaris/analytics");
+
+  return res.data.data;
+};
