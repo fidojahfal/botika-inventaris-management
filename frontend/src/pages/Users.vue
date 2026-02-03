@@ -75,7 +75,7 @@ onMounted(() => {
           <input
             v-model="searchQuery"
             type="text"
-            class="block w-full py-4 pl-12 pr-12 text-sm font-medium text-slate-900 bg-slate-100 border-none rounded-2xl focus:ring-2 focus:ring-slate-200 placeholder-slate-500"
+            class="block w-full py-4 pl-12 pr-12 text-sm font-light text-slate-900 bg-slate-100 border-none rounded-2xl focus:ring-2 focus:ring-slate-200 placeholder-slate-500"
             placeholder="Search Anggota"
           />
 
