@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ArrowLeftOnRectangleIcon } from "@heroicons/vue/20/solid";
+import { MoonIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
 
 const isDark = ref<boolean>(false);
@@ -28,7 +30,10 @@ const toggleTheme = () => {
       @click="toggleTheme"
       class="flex items-center justify-between text-sm font-semibold mb-3 cursor-pointer"
     >
-      <span>Dark Theme</span>
+      <div class="flex gap-1">
+        <MoonIcon class="w-6 h-6 stroke-[1.5]" />
+        <span>Dark Theme</span>
+      </div>
       <button
         class="relative inline-flex h-5 w-8 items-center rounded-full transition-colors duration-300 focus:outline-none cursor-pointer"
         :class="isDark ? 'bg-black' : 'bg-gray-200'"
@@ -45,7 +50,8 @@ const toggleTheme = () => {
       <button
         class="text-sm font-semibold flex items-center gap-2 cursor-pointer"
       >
-        ⎋ Logout
+        <ArrowLeftOnRectangleIcon class="w-6 h-6 stroke-[1.5]" />
+        Logout
       </button>
     </div>
   </div>
