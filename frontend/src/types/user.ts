@@ -20,3 +20,10 @@ export interface CreateUserPayload {
   position_id: number;
   department_id: number;
 }
+
+export interface UpdateUserPayload {
+  id: number,
+  name: string;
+  position_id: number;
+  department_id: number;
+}

@@ -11,11 +11,13 @@ import {
   Position,
   type CreateUserPayload,
   type Department,
+  type UpdateUserPayload,
   type User,
 } from "../types/user";
-import { createUser, getUsers } from "../api/users";
+import { createUser, getUsers, updateUser } from "../api/users";
 import CreateUserModal from "../components/modal/CreateUserModal.vue";
 import { getDepartments, getPositions } from "../api/utils";
+import EditUserModal from "../components/modal/EditUserModal.vue";
 
 const users = ref<User[]>([]);
 const loading = ref<boolean>(false);
@@ -24,7 +26,7 @@ const positions = ref<Position[]>([]);
 const departments = ref<Department[]>([]);
 
 const isCreateModalOpen = ref<boolean>(false);
-const handleOpenModal = async () => {
+const handleOpenModal = () => {
   isCreateModalOpen.value = !isCreateModalOpen.value;
 };
 const handleCreateUser = async (data: CreateUserPayload) => {
@@ -34,6 +36,23 @@ const handleCreateUser = async (data: CreateUserPayload) => {
     error.value = "Failed to create user!";
   } finally {
     isCreateModalOpen.value = !isCreateModalOpen.value;
+    await fetchUser();
+  }
+};
+
+const isEditModalOpen = ref<boolean>(false);
+const selectedUser = ref<User | null>(null);
+const handleEditOpenModal = (user: User) => {
+  isEditModalOpen.value = !isEditModalOpen.value;
+  selectedUser.value = user;
+};
+const handleEditUser = async (data: UpdateUserPayload) => {
+  try {
+    await updateUser(data.id, data);
+  } catch (e) {
+    error.value = "Failed to update user!";
+  } finally {
+    isEditModalOpen.value = !isEditModalOpen.value;
     await fetchUser();
   }
 };
@@ -144,7 +163,11 @@ onMounted(() => {
     </p>
     <p v-if="error">{{ error }}</p>
     <div v-if="!loading && !error">
-      <UserTable :users="filteredUser" :query="searchQuery" />
+      <UserTable
+        :users="filteredUser"
+        :query="searchQuery"
+        @edit="handleEditOpenModal"
+      />
     </div>
     <CreateUserModal
       :positions="positions"
@@ -152,6 +175,14 @@ onMounted(() => {
       :is-open="isCreateModalOpen"
       @close="isCreateModalOpen = false"
       @save="handleCreateUser"
+    />
+    <EditUserModal
+      :positions="positions"
+      :departments="departments"
+      :user="selectedUser"
+      :is-open="isEditModalOpen"
+      @close="isEditModalOpen = false"
+      @save="handleEditUser"
     />
   </AppLayout>
 </template>

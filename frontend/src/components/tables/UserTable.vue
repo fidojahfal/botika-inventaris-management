@@ -38,6 +38,10 @@ const props = defineProps<{
   query: string;
 }>();
 
+const emit = defineEmits<{
+  (e: "edit", user: User): void;
+}>();
+
 const paginatedUsers = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
@@ -155,14 +159,20 @@ const goToPage = (page: number) => {
                   ></div>
 
                   <button
-                    class="flex items-center gap-2 px-4 py-2.5 text-left text-white text-sm hover:bg-gray-800 transition-colors first:rounded-t-xl"
+                    @click="
+                      () => {
+                        emit('edit', user);
+                        closeDropdown();
+                      }
+                    "
+                    class="flex items-center gap-2 px-4 py-2.5 text-left text-white text-sm hover:bg-gray-800 transition-colors first:rounded-t-xl cursor-pointer"
                   >
                     <PencilSquareIcon class="w-4 h-4" />
                     <span>Edit</span>
                   </button>
 
                   <button
-                    class="flex items-center gap-2 px-4 py-2.5 text-left text-white text-sm hover:bg-gray-800 transition-colors last:rounded-b-xl"
+                    class="flex items-center gap-2 px-4 py-2.5 text-left text-white text-sm hover:bg-gray-800 transition-colors last:rounded-b-xl cursor-pointer"
                   >
                     <TrashIcon class="w-4 h-4" />
                     <span>Delete</span>
