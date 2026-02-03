@@ -1,4 +1,8 @@
-import type { CreateInventarisPayload, Inventaris } from "../types/inventaris";
+import type {
+  CreateInventarisPayload,
+  Inventaris,
+  UpdateInventarisPayload,
+} from "../types/inventaris";
 import api from "./axios";
 
 export const getInventaris = async () => {
@@ -12,5 +16,13 @@ export const createInventaris = async (
 ): Promise<Inventaris> => {
   const res = await api.post("/inventaris/create", payload);
 
+  return res.data.data;
+};
+
+export const updateInventaris = async (
+  id: string,
+  payload: UpdateInventarisPayload,
+): Promise<Inventaris> => {
+  const res = await api.put(`/inventaris/${id}`, payload);
   return res.data.data;
 };

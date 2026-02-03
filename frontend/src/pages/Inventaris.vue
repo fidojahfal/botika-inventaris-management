@@ -6,18 +6,13 @@ import {
   BarsArrowDownIcon,
 } from "@heroicons/vue/24/outline";
 import AppLayout from "../components/layout/AppLayout.vue";
-import {
-  type Department,
-  type UpdateUserPayload,
-  type User,
-} from "../types/user";
-import { createUser, deleteUser, updateUser } from "../api/users";
+import { type Department } from "../types/user";
+import { deleteUser, updateUser } from "../api/users";
 import {
   getAssignedUser,
   getDepartments,
   getStatusInventaris,
 } from "../api/utils";
-import EditUserModal from "../components/modal/user/EditUserModal.vue";
 import DeleteUserModal from "../components/modal/user/DeleteUserModal.vue";
 import InventarisTable from "../components/tables/InventarisTable.vue";
 import type {
@@ -25,9 +20,15 @@ import type {
   CreateInventarisPayload,
   Inventaris,
   Status,
+  UpdateInventarisPayload,
 } from "../types/inventaris";
-import { createInventaris, getInventaris } from "../api/inventaris";
+import {
+  createInventaris,
+  getInventaris,
+  updateInventaris,
+} from "../api/inventaris";
 import CreateInventarisModal from "../components/modal/inventaris/CreateInventarisModal.vue";
+import EditInventarisModal from "../components/modal/inventaris/EditInventarisModal.vue";
 
 const inventaris = ref<Inventaris[]>([]);
 const loading = ref<boolean>(false);
@@ -52,14 +53,14 @@ const handleCreateInventaris = async (data: CreateInventarisPayload) => {
 };
 
 const isEditModalOpen = ref<boolean>(false);
-const selectedUser = ref<User | null>(null);
-const handleEditOpenModal = (user: User) => {
+const selectedInventaris = ref<Inventaris | null>(null);
+const handleEditOpenModal = (inventaris: Inventaris) => {
   isEditModalOpen.value = !isEditModalOpen.value;
-  selectedUser.value = user;
+  selectedInventaris.value = inventaris;
 };
-const handleEditUser = async (data: UpdateUserPayload) => {
+const handleEditInventaris = async (data: UpdateInventarisPayload) => {
   try {
-    await updateUser(data.id, data);
+    await updateInventaris(data.id, data);
   } catch (e) {
     error.value = "Failed to update user!";
   } finally {
@@ -69,9 +70,9 @@ const handleEditUser = async (data: UpdateUserPayload) => {
 };
 
 const isDeleteModalOpen = ref<boolean>(false);
-const handleDeleteOpenModal = (user: User) => {
+const handleDeleteOpenModal = (inventaris: Inventaris) => {
   isDeleteModalOpen.value = !isDeleteModalOpen.value;
-  selectedUser.value = user;
+  selectedInventaris.value = inventaris;
 };
 const handleDeleteUser = async (data: { id: number }) => {
   try {
@@ -211,13 +212,14 @@ onMounted(() => {
       @close="isCreateModalOpen = false"
       @save="handleCreateInventaris"
     />
-    <EditUserModal
-      :positions="positions"
+    <EditInventarisModal
+      :assigned-users="assignedUsers"
+      :status-inventaris="status"
       :departments="departments"
-      :user="selectedUser"
+      :inventaris="selectedInventaris"
       :is-open="isEditModalOpen"
       @close="isEditModalOpen = false"
-      @save="handleEditUser"
+      @save="handleEditInventaris"
     />
     <DeleteUserModal
       :user="selectedUser"

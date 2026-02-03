@@ -29,3 +29,5 @@ export interface CreateInventarisPayload {
   status_id: number;
   type: string;
 }
+
+export interface UpdateInventarisPayload extends CreateInventarisPayload {}
