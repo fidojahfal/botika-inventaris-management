@@ -25,3 +25,9 @@ export const getAssignedUser = async (): Promise<AssignedUser[]> => {
 
   return res.data.data;
 };
+
+export const logout = async () => {
+  const res = await api.post("/logout");
+
+  return res.data.message;
+};

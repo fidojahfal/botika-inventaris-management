@@ -2,11 +2,22 @@
 import { ArrowLeftOnRectangleIcon } from "@heroicons/vue/20/solid";
 import { MoonIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
+import { logout } from "../../api/utils";
+import { useRouter } from "vue-router";
 
 const isDark = ref<boolean>(false);
+const router = useRouter();
 
 const toggleTheme = () => {
   isDark.value = !isDark.value;
+};
+
+const handleLogout = async () => {
+  await logout();
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  router.push("/login");
 };
 </script>
 
@@ -48,6 +59,7 @@ const toggleTheme = () => {
     <hr class="border-gray-300 my-2" />
     <div class="cursor-pointer">
       <button
+        @click="handleLogout"
         class="text-sm font-semibold flex items-center gap-2 cursor-pointer"
       >
         <ArrowLeftOnRectangleIcon class="w-6 h-6 stroke-[1.5]" />
