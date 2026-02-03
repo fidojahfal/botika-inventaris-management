@@ -118,8 +118,11 @@ class InventarisController extends Controller
             ];
         }
         return response()->json([
-            'summary' => $summary,
-            'chart' => $chart
+            'message' => 'Success',
+            'data' => [
+                'summary' => $summary,
+                'chart' => $chart
+            ]
         ], 200);
     }
 }
