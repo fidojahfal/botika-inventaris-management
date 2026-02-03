@@ -50,3 +50,4 @@ class UtilityController extends Controller
             "data" => $assignedUser
         ]);
     }
+}
