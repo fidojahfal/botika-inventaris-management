@@ -7,39 +7,47 @@ import {
 } from "@heroicons/vue/24/outline";
 import AppLayout from "../components/layout/AppLayout.vue";
 import {
-  Position,
-  type CreateUserPayload,
   type Department,
   type UpdateUserPayload,
   type User,
 } from "../types/user";
-import { createUser, deleteUser, getUsers, updateUser } from "../api/users";
-import CreateUserModal from "../components/modal/user/CreateUserModal.vue";
-import { getDepartments, getPositions } from "../api/utils";
+import { createUser, deleteUser, updateUser } from "../api/users";
+import {
+  getAssignedUser,
+  getDepartments,
+  getStatusInventaris,
+} from "../api/utils";
 import EditUserModal from "../components/modal/user/EditUserModal.vue";
 import DeleteUserModal from "../components/modal/user/DeleteUserModal.vue";
 import InventarisTable from "../components/tables/InventarisTable.vue";
-import type { Inventaris } from "../types/inventaris";
-import { getInventaris } from "../api/inventaris";
+import type {
+  AssignedUser,
+  CreateInventarisPayload,
+  Inventaris,
+  Status,
+} from "../types/inventaris";
+import { createInventaris, getInventaris } from "../api/inventaris";
+import CreateInventarisModal from "../components/modal/inventaris/CreateInventarisModal.vue";
 
 const inventaris = ref<Inventaris[]>([]);
 const loading = ref<boolean>(false);
 const error = ref<string>("");
-const positions = ref<Position[]>([]);
+const status = ref<Status[]>([]);
+const assignedUsers = ref<AssignedUser[]>([]);
 const departments = ref<Department[]>([]);
 
 const isCreateModalOpen = ref<boolean>(false);
 const handleOpenModal = () => {
   isCreateModalOpen.value = !isCreateModalOpen.value;
 };
-const handleCreateUser = async (data: CreateUserPayload) => {
+const handleCreateInventaris = async (data: CreateInventarisPayload) => {
   try {
-    await createUser(data);
+    await createInventaris(data);
   } catch (e) {
-    error.value = "Failed to create user!";
+    error.value = "Failed to create Inventaris!";
   } finally {
     isCreateModalOpen.value = !isCreateModalOpen.value;
-    await fetchUser();
+    await fetchInventaris();
   }
 };
 
@@ -115,6 +123,8 @@ const fetchInventaris = async () => {
   try {
     inventaris.value = await getInventaris();
     departments.value = await getDepartments();
+    status.value = await getStatusInventaris();
+    assignedUsers.value = await getAssignedUser();
   } catch (e) {
     error.value = "Failed to get inventaris!";
   } finally {
@@ -193,12 +203,13 @@ onMounted(() => {
         @delete="handleDeleteOpenModal"
       />
     </div>
-    <CreateUserModal
-      :positions="positions"
+    <CreateInventarisModal
+      :assigned-users="assignedUsers"
+      :status-inventaris="status"
       :departments="departments"
       :is-open="isCreateModalOpen"
       @close="isCreateModalOpen = false"
-      @save="handleCreateUser"
+      @save="handleCreateInventaris"
     />
     <EditUserModal
       :positions="positions"

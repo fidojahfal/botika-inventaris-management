@@ -162,7 +162,7 @@ const goToPage = (page: number) => {
             </td>
 
             <td class="py-5 text-gray-700 border-b border-gray-100">
-              {{ inv.type == null ? "-" : inv.type.name }}
+              {{ inv.type }}
             </td>
 
             <td class="py-5 text-gray-700 border-b border-gray-100">
