@@ -13,11 +13,7 @@ class CreateTypeInventarisTable extends Migration
      */
     public function up()
     {
-        Schema::create('type_inventaris', function (Blueprint $table) {
-            $table->id();
-            $table->string("name");
-            $table->timestamps();
-        });
+        
     }
 
     /**

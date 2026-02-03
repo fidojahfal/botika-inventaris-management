@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             PositionSeeder::class,
             StatusInventarisSeeder::class,
-            TypeInventarisSeeder::class,
             UserSeeder::class,
             InventarisSeeder::class
         ]);

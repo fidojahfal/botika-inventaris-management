@@ -15,12 +15,7 @@ class Inventaris extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     protected $table = "inventaris";
-    protected $fillable = ["id", "name", "type_id", "serial_number", "spesifikasi", "status_id", "assigned_user_id", "department_id"];
-
-    public function type()
-    {
-        return $this->belongsTo(type_inventaris::class, "type_id");
-    }
+    protected $fillable = ["id", "name", "type", "serial_number", "spesifikasi", "status_id", "assigned_user_id", "department_id"];
 
     public function status()
     {

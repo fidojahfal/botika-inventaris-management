@@ -16,7 +16,7 @@ class CreateInventarisTable extends Migration
         Schema::create('inventaris', function (Blueprint $table) {
             $table->string("id")->primary();
             $table->string("name");
-            $table->foreignId("type_id")->nullable()->constrained("type_inventaris")->nullOnDelete();
+            $table->string("type");
             $table->string("serial_number")->unique();
             $table->string("spesifikasi");
             $table->foreignId("status_id")->constrained("status_inventaris");

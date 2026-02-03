@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Position;
 use App\Models\Status_inventaris;
+use App\Models\type_inventaris;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -49,4 +50,3 @@ class UtilityController extends Controller
             "data" => $assignedUser
         ]);
     }
-}

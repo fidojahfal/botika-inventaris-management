@@ -11,7 +11,7 @@ class InventarisController extends Controller
 {
     public function index()
     {
-        $inventaris = Inventaris::with(['department', 'assignedUser:id,name', 'status', 'type'])->get();
+        $inventaris = Inventaris::with(['department', 'assignedUser:id,name', 'status'])->get();
 
         return response()->json([
             'message' => "Success",
@@ -26,7 +26,7 @@ class InventarisController extends Controller
             [
                 'id' => 'string|required',
                 'name' => 'string|required',
-                'type_id' => 'integer|required|exists:type_inventaris,id',
+                'type' => 'string|required',
                 'serial_number' => 'string|required',
                 'spesifikasi' => 'string|required',
                 'status_id' => 'integer|required|exists:status_inventaris,id',
@@ -59,7 +59,7 @@ class InventarisController extends Controller
             $request->all(),
             [
                 'name' => 'string|required',
-                'type_id' => 'integer|required|exists:type_inventaris,id',
+                'type' => 'string|required',
                 'serial_number' => 'string|required',
                 'spesifikasi' => 'string|required',
                 'status_id' => 'integer|required|exists:status_inventaris,id',
