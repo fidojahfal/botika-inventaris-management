@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Inventaris;
+use App\Models\Status_inventaris;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class InventarisController extends Controller
@@ -91,6 +93,33 @@ class InventarisController extends Controller
 
         return response()->json([
             "message" => 'Success',
+        ], 200);
+    }
+
+    public function chartAnalytics()
+    {
+        $counts = Inventaris::select('status_id', DB::raw('count(*) as total'))->groupBy('status_id')->pluck('total', 'status_id');
+
+        $statuses = Status_inventaris::all();
+
+        $summary = [];
+        $chart = [];
+
+        foreach ($statuses as $status) {
+            $total = $counts[$status->id] ?? 0;
+
+            $key = strtolower(str_replace(' ', '_', $status->name));
+
+            $summary[$key] = $total;
+
+            $chart[] = [
+                'label' => $status->name,
+                'value' => $total
+            ];
+        }
+        return response()->json([
+            'summary' => $summary,
+            'chart' => $chart
         ], 200);
     }
 }
