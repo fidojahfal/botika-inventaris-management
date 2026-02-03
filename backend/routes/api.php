@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\InventarisController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\UtilityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/inventaris/create', [InventarisController::class, 'store']);
     Route::put('/inventaris/{id}', [InventarisController::class, 'update']);
     Route::delete('/inventaris/{id}', [InventarisController::class, 'destroy']);
+});
+
+//Utility Route
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/departments', [UtilityController::class, 'getAllDepartments']);
 });
