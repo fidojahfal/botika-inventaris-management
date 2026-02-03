@@ -29,9 +29,24 @@ const login = async () => {
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-100">
     <form @submit.prevent="login" class="bg-white p-6 rounded-xl w-96">
-      <h1 class="flex justify-center text-2xl font-semibold mb-4">Login</h1>
+      <div class="flex justify-center mb-4">
+        <div
+          class="flex items-center justify-center w-20 h-20 bg-black rounded-2xl shrink-0"
+        >
+          <span
+            class="text-6xl font-medium bg-gradient-to-r from-teal-300 to-amber-300 bg-clip-text text-transparent pb-4"
+          >
+            m
+          </span>
+        </div>
+      </div>
+      <h1 class="flex justify-center text-3xl font-bold mb-4">Login</h1>
 
-      <input v-model="email" placeholder="Email" class="input border-1 rounded-lg p-2 w-full " />
+      <input
+        v-model="email"
+        placeholder="Email"
+        class="input border-1 rounded-lg p-2 w-full"
+      />
       <input
         v-model="password"
         type="password"
@@ -39,7 +54,9 @@ const login = async () => {
         class="input mt-4 border-1 rounded-lg p-2 w-full"
       />
 
-      <button class="bg-black mt-10 p-2 w-full rounded-xl text-white">Login</button>
+      <button class="bg-black mt-10 p-2 w-full rounded-xl text-white cursor-pointer">
+        Login
+      </button>
       <p v-if="error" class="text-red-500 mt-2">{{ error }}</p>
     </form>
   </div>
