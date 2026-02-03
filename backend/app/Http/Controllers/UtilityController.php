@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Position;
 use App\Models\Status_inventaris;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UtilityController extends Controller
@@ -36,6 +37,16 @@ class UtilityController extends Controller
         return response()->json([
             "message" => 'Success',
             "data" => $status
+        ]);
+    }
+
+    public function getAssignedUser()
+    {
+        $assignedUser = User::all(['id', 'name']);
+
+        return response()->json([
+            "message" => 'Success',
+            "data" => $assignedUser
         ]);
     }
 }

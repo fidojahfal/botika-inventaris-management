@@ -41,4 +41,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/departments', [UtilityController::class, 'getAllDepartments']);
     Route::get('/positions', [UtilityController::class, 'getAllPositions']);
     Route::get('/status/inventaris', [UtilityController::class, 'getAllStatusInventaris']);
+    Route::get('/assigns', [UtilityController::class, 'getAssignedUser']);
 });
