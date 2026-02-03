@@ -40,6 +40,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "edit", user: User): void;
+  (e: "delete", user: User): void;
 }>();
 
 const paginatedUsers = computed(() => {
@@ -172,6 +173,12 @@ const goToPage = (page: number) => {
                   </button>
 
                   <button
+                    @click="
+                      () => {
+                        emit('delete', user);
+                        closeDropdown();
+                      }
+                    "
                     class="flex items-center gap-2 px-4 py-2.5 text-left text-white text-sm hover:bg-gray-800 transition-colors last:rounded-b-xl cursor-pointer"
                   >
                     <TrashIcon class="w-4 h-4" />

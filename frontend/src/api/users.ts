@@ -20,3 +20,8 @@ export const updateUser = async (
   const res = await api.put(`/users/${id}`, payload);
   return res.data.data;
 };
+
+export const deleteUser = async (id: number): Promise<string> => {
+  const res = await api.delete(`/users/${id}`);
+  return res.data.message;
+};

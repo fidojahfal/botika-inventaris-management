@@ -14,10 +14,11 @@ import {
   type UpdateUserPayload,
   type User,
 } from "../types/user";
-import { createUser, getUsers, updateUser } from "../api/users";
+import { createUser, deleteUser, getUsers, updateUser } from "../api/users";
 import CreateUserModal from "../components/modal/CreateUserModal.vue";
 import { getDepartments, getPositions } from "../api/utils";
 import EditUserModal from "../components/modal/EditUserModal.vue";
+import DeleteUserModal from "../components/modal/deleteUserModal.vue";
 
 const users = ref<User[]>([]);
 const loading = ref<boolean>(false);
@@ -53,6 +54,22 @@ const handleEditUser = async (data: UpdateUserPayload) => {
     error.value = "Failed to update user!";
   } finally {
     isEditModalOpen.value = !isEditModalOpen.value;
+    await fetchUser();
+  }
+};
+
+const isDeleteModalOpen = ref<boolean>(false);
+const handleDeleteOpenModal = (user: User) => {
+  isDeleteModalOpen.value = !isDeleteModalOpen.value;
+  selectedUser.value = user;
+};
+const handleDeleteUser = async (data: { id: number }) => {
+  try {
+    await deleteUser(data.id);
+  } catch (e) {
+    error.value = "Failed to update user!";
+  } finally {
+    isDeleteModalOpen.value = !isDeleteModalOpen.value;
     await fetchUser();
   }
 };
@@ -167,6 +184,7 @@ onMounted(() => {
         :users="filteredUser"
         :query="searchQuery"
         @edit="handleEditOpenModal"
+        @delete="handleDeleteOpenModal"
       />
     </div>
     <CreateUserModal
@@ -183,6 +201,12 @@ onMounted(() => {
       :is-open="isEditModalOpen"
       @close="isEditModalOpen = false"
       @save="handleEditUser"
+    />
+    <DeleteUserModal
+      :user="selectedUser"
+      :is-open="isDeleteModalOpen"
+      @close="isDeleteModalOpen = false"
+      @confirm="handleDeleteUser"
     />
   </AppLayout>
 </template>
