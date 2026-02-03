@@ -9,7 +9,7 @@ export const getUsers = async (): Promise<User[]> => {
 
 export const createUser = async (payload: CreateUserPayload): Promise<User> => {
   const res = await api.post("/users/create", payload);
-  console.log(res);
+  
   return res.data.data;
 };
 

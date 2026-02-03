@@ -7,13 +7,11 @@ import {
 } from "@heroicons/vue/24/outline";
 import AppLayout from "../components/layout/AppLayout.vue";
 import { type Department } from "../types/user";
-import { deleteUser, updateUser } from "../api/users";
 import {
   getAssignedUser,
   getDepartments,
   getStatusInventaris,
 } from "../api/utils";
-import DeleteUserModal from "../components/modal/user/DeleteUserModal.vue";
 import InventarisTable from "../components/tables/InventarisTable.vue";
 import type {
   AssignedUser,
@@ -105,7 +103,6 @@ const filteredInventaris = computed(() => {
   }
 
   const loweringQuery = searchQuery.value.toLowerCase();
-  console.log(loweringQuery);
   return inventaris.value.filter((inv) => {
     return (
       inv.id.toLowerCase().includes(loweringQuery) ||
