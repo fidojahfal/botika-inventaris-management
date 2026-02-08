@@ -9,6 +9,7 @@ const routes = [
   { path: "/users", component: Users, meta: { requiresAuth: true } },
   { path: "/inventaris", component: Inventaris, meta: { requiresAuth: true } },
   { path: "/analytics", component: Analytics, meta: { requiresAuth: true } },
+  { path: "/", redirect: "/login" },
 ];
 
 const router = createRouter({
